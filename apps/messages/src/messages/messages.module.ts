@@ -38,7 +38,7 @@ export class MessagesModule implements NestModule {
     consumer.apply(LoggerMiddleware).forRoutes('*');
     consumer
       .apply(MiddlewareMetricsIncMiddleware)
-      .exclude('/metrics', '/reset')
+      .exclude('/admin/metrics', '/reset')
       .forRoutes('*');
   }
 }
