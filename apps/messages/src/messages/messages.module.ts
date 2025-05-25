@@ -12,6 +12,8 @@ import { ResetService } from './services/reset.service';
 import { MiddlewareMetricsIncMiddleware } from './middleware/middleware-metrics-inc.middleware';
 import { MetricsController } from './controllers/metrics.controller';
 import { MetricsService } from './services/metrics.service';
+import { ValidateChirpService } from './services/validate_chirp.service';
+import { ValidateChirpController } from './controllers/validate_chirp.controller';
 
 @Module({
   //   imports: [
@@ -30,8 +32,15 @@ import { MetricsService } from './services/metrics.service';
     HealthzController,
     ResetController,
     MetricsController,
+    ValidateChirpController,
   ],
-  providers: [AssetsService, MessagesService, ResetService, MetricsService],
+  providers: [
+    AssetsService,
+    MessagesService,
+    ResetService,
+    MetricsService,
+    ValidateChirpService,
+  ],
 })
 export class MessagesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

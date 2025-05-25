@@ -1,4 +1,4 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { ResetService } from '../services/reset.service';
 
@@ -6,7 +6,7 @@ import { ResetService } from '../services/reset.service';
 export class ResetController {
   constructor(private readonly ResetService: ResetService) {}
 
-  @Get('reset')
+  @Post('reset')
   getReset(_: unknown, @Res() res: Response) {
     res.set('Cache-Control', 'no-cache');
     return this.ResetService.reset(res);

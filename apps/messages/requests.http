@@ -9,5 +9,18 @@ Content-Type: application/json
 {
   "content": "Hello, world!"
 }
+
 ### Get a message by ID
 GET http://localhost:8080/messages/1
+
+### Reset requests count
+Post http://localhost:8080/admin/reset
+
+
+### Validate a chirp
+Post http://localhost:8080/api/validate_chirp
+Content-Type: application/json
+
+{
+  "body": "Hello, world!"
+}
