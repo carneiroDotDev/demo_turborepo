@@ -3,7 +3,9 @@ import { ValidateChirpDto } from 'dtos/validate_chirp.dto';
 export class ValidateChipRepository {
   private static readonly MAX_LENGTH = 140;
 
-  validate(content: ValidateChirpDto): { valid: boolean } | { error: string } {
+  validate(
+    content: ValidateChirpDto,
+  ): { body: string } | { cleanedBody: string } | { error: string } {
     try {
       const jsonString = JSON.stringify(content);
       const json = JSON.parse(jsonString) as ValidateChirpDto;
@@ -22,9 +24,23 @@ export class ValidateChipRepository {
       }
 
       console.log(json);
+      // Cleaning up the content: if the contet body contains the words
+      // kerfuffle, sharbert, or fornax those should be substituted with
+      // **** being case insensitive
+      const messageBody = json.body
+        .replace(/kerfuffle/gi, '****')
+        .replace(/sharbert/gi, '****')
+        .replace(/fornax/gi, '****');
+      json.body = messageBody;
+      console.log('messageBody ->', messageBody);
+
+      const isCleaned = messageBody !== json.body;
+      if (isCleaned) {
+        console.log('Chirp was cleaned');
+      }
 
       return {
-        valid: true,
+        cleanedBody: messageBody,
       };
     } catch (error) {
       console.log('error chirp ->', error);
